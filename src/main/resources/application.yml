@@ -1,0 +1,41 @@
+#aws
+aws:
+  access-key :
+  access-secret :
+  default-region : us-east-1
+#
+#cognito user pool
+  cognito:
+    clientId: 7tg03d5iu3gi4cieh0kqej5ggv
+    userPoolId: us-east-1_z13rQXuzP
+    region: us-east-1
+    connectionTimeout: 2000
+    readTimeout: 2000
+    jwk : https://cognito-idp.us-east-1.amazonaws.com/us-east-1_z13rQXuzP/.well-known/jwks.json
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  security:
+    oauth2:
+      resourceserver.jwt.issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_z13rQXuzP
+#      client.registration.cognito.clientName : AWSCognitoSpringBootApp
+#      client.registration.cognito.redirect-uri : http://localhost:8081
+  profiles:
+    include:
+      - swagger
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org:
+      springframework: INFO
+    com:
+      example: INFO
+
+# Logging pattern for console
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
